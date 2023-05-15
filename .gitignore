@@ -1,0 +1,10 @@
+node_modules/
+coverage/
+lerna-debug.log
+/dist
+/dev
+.deployments.devnet.json
+
+alephium.config.ts
+artifacts/
+.project.json

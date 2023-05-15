@@ -1,0 +1,38 @@
+import "std/fungible_token_interface"
+
+Contract Fetatoken(
+    symbol: ByteVec,
+    name: ByteVec,
+    decimals: U256,
+    supply: U256,
+    balance: U256
+) implements IFungibleToken {
+
+    event Withdraw(to: Address)
+
+    pub fn getTotalSupply() -> U256 {
+        return supply
+    }
+
+    pub fn getSymbol() -> ByteVec {
+        return symbol
+    }
+
+    pub fn getName() -> ByteVec {
+        return name
+    }
+
+    pub fn getDecimals() -> U256 {
+        return decimals
+    }
+
+    pub fn balance() -> U256 {
+        return balance
+    }
+
+    @using(assetsInContract = true, checkExternalCaller = false)
+    pub fn withdraw() -> () {
+        transferTokenFromSelf!(callerAddress!(), selfTokenId!(), balance)
+        emit Withdraw(callerAddress!())
+    }
+}
